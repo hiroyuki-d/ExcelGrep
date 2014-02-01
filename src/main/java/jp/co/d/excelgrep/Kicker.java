@@ -12,17 +12,28 @@ public class Kicker {
 		ArrayList<File> list = crawler.readFolder(new File(args[0]));
 		for (int i = 0; i < list.size(); i++) {
 			ExcelGrep eg = new ExcelGrep(list.get(i));
-			Object[][][] a = eg.readLine();
-			Judge j = new Judge();
-			for (Object[][] sheet : a) {
-				if (sheet == null)
+			Object[][][] book = eg.readLine();
+			Judge jud = new Judge(args[1]);
+
+			for (int j = 0; j < book.length; j++) {
+				if (book[j] == null)
 					continue;
-				for (Object[] line : sheet) {
-					if (line == null)
+
+				for (int k = 0; k < book[j].length; k++) {
+					if (book[j][k] == null)
 						continue;
-					Judgement res = j.judge(line);
-					if (res.isFlag())
-						System.out.println("引っかかりました");
+					Judgement res = jud.judge(book[j][k]);
+					if (res.isFlag()) {
+						System.out.print("Hit");
+						System.out.print("\t");
+						System.out.print(list.get(i).getAbsolutePath());
+						System.out.print("\t");
+						System.out.print("SheetNo." + (j + 1));
+						System.out.print("\t");
+						System.out.print("RowNo." + (k + 1));
+						System.out.print("\t");
+						System.out.println("ColNo." + (res.getCol() + 1));
+					}
 				}
 			}
 		}
