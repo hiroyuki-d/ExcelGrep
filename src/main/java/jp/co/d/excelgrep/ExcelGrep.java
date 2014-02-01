@@ -17,18 +17,18 @@ public class ExcelGrep {
 		targetFile = target;
 	}
 
-	public Object[] readLine() {
+	public Object[][][] readLine() {
 		try {
 			//Excelのワークブックを読み込みます。
 			POIFSFileSystem filein = new POIFSFileSystem(new FileInputStream(targetFile));
 			HSSFWorkbook wb = new HSSFWorkbook(filein);
 
-			Object[] sheetArray = new Object[wb.getNumberOfSheets()];
+			Object[][][] sheetArray = new Object[wb.getNumberOfSheets()][][];
 			// シートごとのループ
 			for (int i = 0; i < wb.getNumberOfSheets(); i++) {
 				//シートを読み込みます。
 				HSSFSheet sheet = wb.getSheetAt(i);
-				Object[] rowArray = new Object[sheet.getLastRowNum() + 1];
+				Object[][] rowArray = new Object[sheet.getLastRowNum() + 1][];
 				// 行ごとのループ
 				if (sheet.getLastRowNum() == 0)
 					continue; // シートに何も入っていない時は、最大行数が0として帰ってくる。
