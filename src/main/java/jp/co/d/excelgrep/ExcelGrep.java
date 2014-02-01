@@ -17,6 +17,9 @@ public class ExcelGrep {
 		targetFile = target;
 	}
 
+	/**
+	 * @return シート別、行別、カラム別に格納された文字列配列
+	 */
 	public Object[][][] readLine() {
 		try {
 			//Excelのワークブックを読み込みます。

@@ -17,10 +17,10 @@ public class Kicker {
 			for (Object[][] sheet : a) {
 				if (sheet == null)
 					continue;
-				for (Object line : sheet) {
+				for (Object[] line : sheet) {
 					if (line == null)
 						continue;
-					Judgement res = j.judge((Object[]) line);
+					Judgement res = j.judge(line);
 					if (res.isFlag())
 						System.out.println("引っかかりました");
 				}
